@@ -147,15 +147,14 @@ int main()
     {
         while (getline(fin, singleInputFileLine)) // while loop used to read the movie title, which is the 1st line in the input file
         {
-            if (singleInputFileLine.empty()) // see if there is a blank line, to move on to the movie review comments
-                continue; // continue, to move on to the review comments for the movie in input file
-
             Movie newNode(singleInputFileLine); // creation of a Movie object
 
-            while (getline(fin, singleInputFileLine)) // while loop used to read the movie review comments
+            while (getline(fin, singleInputFileLine)) // another while loop used to read the movie review comments
             {
-                if (singleInputFileLine.empty()) // 
+                if (singleInputFileLine.empty()) // if a blank line is encountered, we have reached the end of the review comments for this movie
+                {
                     break;
+                }
 
                 // rating will be a double, within the range of 1.0 - 5.0
                 rating = (rand() % 41 + 10) / 10.0; // rand() % 41 = 0 - 40, + 10 = 10 - 50, / 10.0 = 1.0 - 5.0 
