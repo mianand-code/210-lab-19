@@ -29,15 +29,15 @@ class Movie
     public:
         // creation of a partial constructor, Movie(string movieTitle)
         // inline, since it is 1 line
-        // DESCRIPTION:
-        // ARGUMENTS:
-        // RETURNS:
-        Movie(string movieTitle)            { title = movieTitle; }
+        // DESCRIPTION: this partial constructor initializes "title" by parameter and initializes "head" to nullptr
+        // ARGUMENTS: string movieTitle, represents the title of the movie
+        // RETURNS: no return type
+        Movie(string movieTitle)            { title = movieTitle; head = nullptr; }
 
         // setters, inline since it is 1 line
-        // function header
-        // DESCRIPTION:
-        // ARGUMENTS:
+        // void setTitle(string movieTitle) function header
+        // DESCRIPTION: this function will "set" the movie titles for each Movie object
+        // ARGUMENTS: string movieTitle, represents the title of the movie
         // RETURNS:
         void setTitle(string movieTitle)    { title = movieTitle; }
 
@@ -53,6 +53,23 @@ class Movie
         // DESCRIPTION:
         // ARGUMENTS:
         // RETURNS:
+        void addNodeToHead(double movierating, string movieComment)
+        {
+            ReviewNode *newNode = new ReviewNode; // create a new node
+            newNode->rating = movierating; // set movie rating of new node
+            newNode->comment = movieComment; // set movie comment of new node
+
+            if (!head) // if linked list is empty
+            {
+                head = newNode; // make newNode the head
+                newNode->next = nullptr; // next node after newNode should be set to nullptr
+            }
+            else // if linked list is NOT empty
+            {
+                newNode->next = head; // next will now point to list's 1st node
+                head = newNode; // head points to newNode
+            }
+        }
 };
 
 int main()
