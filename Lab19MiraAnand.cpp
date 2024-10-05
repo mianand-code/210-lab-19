@@ -97,7 +97,22 @@ class Movie
             while (current)
             {
                 cout << "Reviewer #" << reviewer++ << " rating: "; 
+                cout << fixed << setprecision(1) << current->rating << ", "; // rating should be 1 decimal place
+                cout << "Reviewer comment: " << current->comment << endl;
+
+                current = current->next; // move to next node
             }
+        }
+
+        // creating third member method
+        // void deleteList() function header
+        // DESCRIPTION: this function will traverse the list (visit each node) and delete each node
+        // - clean up linked list to avoid memory leaks, for good housekeeping
+        // ARGUMENTS: no arguments/parameters
+        // RETURNS: nothing, void function
+        void deleteList()
+        {
+            
         }
 };
 
