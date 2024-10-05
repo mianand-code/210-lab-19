@@ -95,13 +95,12 @@ class Movie
             ReviewNode *current = head; // used to start at the beginning of the list and traverse
 
             // traverse the list and display its contents 
-            cout << "Outputting reviews for all movies..." << endl << endl;
-            cout << "Here are the reviews (movie ratings and comments) for " << title << ":" << endl;
+            cout << "Here are the reviews for " << title << " -" << endl;
             while (current)
             {
-                cout << "Reviewer #" << reviewer++ << " rating: "; 
-                cout << fixed << setprecision(1) << current->rating << ", "; // rating should be 1 decimal place
-                cout << "Reviewer comment: " << current->comment << endl;
+                cout << "Reviewer #" << reviewer++ << " - ";
+                cout << "Rating: "<< fixed << setprecision(1) << current->rating << ", "; // rating should be 1 decimal place
+                cout << "Comment: " << current->comment << endl;
 
                 current = current->next; // move to next node
             }
@@ -177,10 +176,20 @@ int main()
 
     // output contents of the vector
     // using a C++ 11 range loop and "auto" keyword to output contents of the vector
+    cout << "Outputting reviews for all movies..." << endl << endl;
     for (auto movie : reviews)
     {
         // printing contents by calling the print() public member function
         movie.print();
+        cout << endl;
+    }
+
+    // delete the linked list
+    // using a C++ 11 range loop and "auto" keyword to delete the linked list
+    for (auto movie : reviews)
+    {
+        // deleting linked list by calling the deleteList() public member function
+        movie.deleteList();
     }
     
     return 0;
