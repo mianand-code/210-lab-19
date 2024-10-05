@@ -2,6 +2,9 @@
 // Module 6, Lesson: Linked Lists, Assignment: Abstract & Automate
 // IDE used: Visual Studio Code for Mac
 
+// The program trusts that the user has the external input file is structured exactly the way I have created it
+// Please open input file to see specific format to follow
+
 #include <cstdlib> // needed to generate random number
 #include <ctime> // needed to generate random number
 #include <fstream> // to be able to read data from an external .txt file
@@ -142,16 +145,16 @@ int main()
     // the if condition checks if the input file opened correctly
     if (fin.good())
     {
-        while (getline(fin, singleInputFileLine))
+        while (getline(fin, singleInputFileLine)) // while loop used to read the movie title, which is the 1st line in the input file
         {
-            if (singleInputFileLine.empty())
-                break;
+            if (singleInputFileLine.empty()) // see if there is a blank line, to move on to the movie review comments
+                continue; // continue, to move on to the review comments for the movie in input file
 
-            Movie newNode(singleInputFileLine);
+            Movie newNode(singleInputFileLine); // creation of a Movie object
 
-            while (getline(fin, singleInputFileLine))
+            while (getline(fin, singleInputFileLine)) // while loop used to read the movie review comments
             {
-                if (singleInputFileLine.empty())
+                if (singleInputFileLine.empty()) // 
                     break;
 
                 // rating will be a double, within the range of 1.0 - 5.0
@@ -163,7 +166,13 @@ int main()
         }
 
         fin.close(); // Close the input file
-
+    }
+    // if the input file did not open correctly, execute "else"
+    else
+    {
+        cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location and try running the program again." << endl;
+        cout << "Program will now exit..." << endl;
+        return 1; // return an error state
     }
     
     return 0;
