@@ -129,6 +129,14 @@ int main()
     srand(time(0)); // needed as the first line in main() to generate random numbers for movie rating
 
     vector<Movie> reviews; // creation of an STD::vector container to hold multiple Movie objects
+    string title; // declaring a string variable to hold the movie title to be read from the input file
+
+    // declaration and initialization of a string variable that holds the name of the input file to read data from
+    string inputFile = "movieReviewInfo.txt";
+    // creation of an ifsteam (input file) object
+    ifstream fin;
+    // open the input file
+    fin.open(inputFile);
 
     // creation of 4 "Movie" objects
     // titles of each "Movie" object are initialized through use of our partial constructor
