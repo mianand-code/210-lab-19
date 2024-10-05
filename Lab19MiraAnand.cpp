@@ -38,25 +38,27 @@ class Movie
         // void setTitle(string movieTitle) function header
         // DESCRIPTION: this function will "set" the movie titles for each Movie object
         // ARGUMENTS: string movieTitle, represents the title of the movie
-        // RETURNS:
+        // RETURNS: nothing, void function
         void setTitle(string movieTitle)    { title = movieTitle; }
 
         // getters, inline since it is 1 line
-        // function header
-        // DESCRIPTION:
-        // ARGUMENTS:
-        // RETURNS:
+        // string getTitle() const function header
+        // DESCRIPTION: this function will "get" the movie titles for each Movie object after they are "set"
+        // ARGUMENTS: no arguments/parameters
+        // RETURNS: the string movie title for each movie
+        // adding a trailing const, since getters do not change an object's data
         string getTitle() const             { return title; }
 
         // creating first member method
-        // function header
-        // DESCRIPTION:
-        // ARGUMENTS:
-        // RETURNS:
-        void addNodeToHead(double movierating, string movieComment)
+        // void addNodeToHead(double movieRating, string movieComment) function header
+        // DESCRIPTION: this function will create a new node, set the value of the new node, and add this new node to the front (head) of the list
+        // ARGUMENTS: double movieRating, which represents the movie rating being added
+        // - string movieComment, which represents the movie comment being added
+        // RETURNS: nothing, void function
+        void addNodeToHead(double movieRating, string movieComment)
         {
             ReviewNode *newNode = new ReviewNode; // create a new node
-            newNode->rating = movierating; // set movie rating of new node
+            newNode->rating = movieRating; // set movie rating of new node
             newNode->comment = movieComment; // set movie comment of new node
 
             if (!head) // if linked list is empty
@@ -68,6 +70,22 @@ class Movie
             {
                 newNode->next = head; // next will now point to list's 1st node
                 head = newNode; // head points to newNode
+            }
+        }
+
+        // creating second member method
+        // void print() function header
+        // DESCRIPTION: this function will check if the linked list is empty or not. The contents of the linked list will be neatly outputted to the console
+        // - if there are no contents, the user will be notified with a console message and the program will exit
+        // ARGUMENTS: no arguments/parameters
+        // RETURNS: nothing, void function
+        void print()
+        {
+            if (!head) // if linked list is empty
+            {
+                cout << "The linked list is empty." << endl;
+                cout << "Now exiting program..." << endl;
+                return; // exit the function
             }
         }
 };
