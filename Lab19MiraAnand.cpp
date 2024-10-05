@@ -129,7 +129,8 @@ int main()
     srand(time(0)); // needed as the first line in main() to generate random numbers for movie rating
 
     vector<Movie> reviews; // creation of an STD::vector container to hold multiple Movie objects
-    string title; // declaring a string variable to hold the movie title to be read from the input file
+    string singleInputFileLine; // declaring a string variable to hold each line encountered in the input file
+    double rating; // to hold a random movie rating (1.0 - 5.0)
 
     // declaration and initialization of a string variable that holds the name of the input file to read data from
     string inputFile = "movieReviewInfo.txt";
@@ -138,18 +139,17 @@ int main()
     // open the input file
     fin.open(inputFile);
 
-    // creation of 4 "Movie" objects
-    // titles of each "Movie" object are initialized through use of our partial constructor
-    Movie movie1("Titanic");
-    Movie movie2("The Godfather");
-    Movie movie3("The Notebook");
-    Movie movie4("Beetlejuice");
+    // the if condition checks if the input file opened correctly
+    if (fin.good())
+    {
+        while (getline(fin, singleInputFileLine))
+        {
+            Movie newNode(singleInputFileLine);
 
-    // using push_back to add Movie objects into the vector
-    reviews.push_back(movie1);
-    reviews.push_back(movie2);
-    reviews.push_back(movie3);
-    reviews.push_back(movie4);
+            if (singleInputFileLine.empty())
+                break;
+        }
+    }
     
     return 0;
 }
