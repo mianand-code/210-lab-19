@@ -112,13 +112,23 @@ class Movie
         // RETURNS: nothing, void function
         void deleteList()
         {
-            
+            ReviewNode *current = head; // set current to head of list
+            while (current) // traverse the list, visit each node
+            {
+                head = current->next; // head is set to next node
+                delete current; // delete node
+                current = head; // current is set to head again
+            }
+
+            head = nullptr; // indicates an empty list
         }
 };
 
 int main()
 {
     srand(time(0)); // needed as the first line in main() to generate random numbers for movie rating
+
+    vector<Movie> reviews; // creation of an STD::vector container to hold multiple Movie objects
     
     return 0;
 }
