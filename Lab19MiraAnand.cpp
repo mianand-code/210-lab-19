@@ -87,6 +87,17 @@ class Movie
                 cout << "Now exiting program..." << endl;
                 return; // exit the function
             }
+
+            int reviewer = 1; // to keep a count/track of the number of human reviewers for each movie
+            ReviewNode *current = head; // used to start at the beginning of the list and traverse
+
+            // traverse the list and display its contents 
+            cout << "Outputting reviews for all movies..." << endl << endl;
+            cout << "Here are the reviews (movie ratings and comments) for " << title << ":" << endl;
+            while (current)
+            {
+                cout << "Reviewer #" << reviewer++ << " rating: "; 
+            }
         }
 };
 
