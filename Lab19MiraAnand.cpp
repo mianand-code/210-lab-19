@@ -133,6 +133,15 @@ int main()
     // creation of 4 "Movie" objects
     // titles of each "Movie" object are initialized through use of our partial constructor
     Movie movie1("Titanic");
+    Movie movie2("The Godfather");
+    Movie movie3("The Notebook");
+    Movie movie4("Beetlejuice");
+
+    // using push_back to add Movie objects into the vector
+    reviews.push_back(movie1);
+    reviews.push_back(movie2);
+    reviews.push_back(movie3);
+    reviews.push_back(movie4);
     
     return 0;
 }
