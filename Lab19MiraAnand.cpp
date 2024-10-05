@@ -129,6 +129,10 @@ int main()
     srand(time(0)); // needed as the first line in main() to generate random numbers for movie rating
 
     vector<Movie> reviews; // creation of an STD::vector container to hold multiple Movie objects
+
+    // creation of 4 "Movie" objects
+    // titles of each "Movie" object are initialized through use of our partial constructor
+    Movie movie1("Titanic");
     
     return 0;
 }
