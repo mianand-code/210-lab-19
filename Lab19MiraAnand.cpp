@@ -144,11 +144,26 @@ int main()
     {
         while (getline(fin, singleInputFileLine))
         {
-            Movie newNode(singleInputFileLine);
-
             if (singleInputFileLine.empty())
                 break;
+
+            Movie newNode(singleInputFileLine);
+
+            while (getline(fin, singleInputFileLine))
+            {
+                if (singleInputFileLine.empty())
+                    break;
+
+                // rating will be a double, within the range of 1.0 - 5.0
+                rating = (rand() % 41 + 10) / 10.0; // rand() % 41 = 0 - 40, + 10 = 10 - 50, / 10.0 = 1.0 - 5.0 
+                newNode.addNodeToHead(rating, singleInputFileLine);
+            }
+
+            reviews.push_back(newNode);
         }
+
+        fin.close(); // Close the input file
+
     }
     
     return 0;
