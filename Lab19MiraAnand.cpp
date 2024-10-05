@@ -158,9 +158,10 @@ int main()
 
                 // rating will be a double, within the range of 1.0 - 5.0
                 rating = (rand() % 41 + 10) / 10.0; // rand() % 41 = 0 - 40, + 10 = 10 - 50, / 10.0 = 1.0 - 5.0 
-                newNode.addNodeToHead(rating, singleInputFileLine);
+                newNode.addNodeToHead(rating, singleInputFileLine); // calling the addNodeToHead public member function, setting the rating and review comment
             }
 
+            // using push_back to push data into the vector; the user can have as many movie records in the file as they would like
             reviews.push_back(newNode);
         }
 
@@ -172,6 +173,14 @@ int main()
         cout << "ERROR: Could not open input file. Please make sure the file exists in the correct location and try running the program again." << endl;
         cout << "Program will now exit..." << endl;
         return 1; // return an error state
+    }
+
+    // output contents of the vector
+    // using a C++ 11 range loop and "auto" keyword to output contents of the vector
+    for (auto movie : reviews)
+    {
+        // printing contents by calling the print() public member function
+        movie.print();
     }
     
     return 0;
