@@ -16,10 +16,43 @@ class Movie
 {
     // private member variables
     private:
-        struct ReviewNode // creation of a struct named "Review", 
+        struct ReviewNode // creation of a struct named "Review", for linked list development
         {
-
+            double rating; // to store a movie rating
+            string comment; // to store a movie review comment
+            ReviewNode *next; // points to next node
         };
+        string title; // to store a movie title
+        ReviewNode *head; // pointer to head of the linked list
+    
+    // public member functions
+    public:
+        // creation of a partial constructor, Movie(string movieTitle)
+        // inline, since it is 1 line
+        // DESCRIPTION:
+        // ARGUMENTS:
+        // RETURNS:
+        Movie(string movieTitle)            { title = movieTitle; }
+
+        // setters, inline since it is 1 line
+        // function header
+        // DESCRIPTION:
+        // ARGUMENTS:
+        // RETURNS:
+        void setTitle(string movieTitle)    { title = movieTitle; }
+
+        // getters, inline since it is 1 line
+        // function header
+        // DESCRIPTION:
+        // ARGUMENTS:
+        // RETURNS:
+        string getTitle() const             { return title; }
+
+        // creating first member method
+        // function header
+        // DESCRIPTION:
+        // ARGUMENTS:
+        // RETURNS:
 };
 
 int main()
