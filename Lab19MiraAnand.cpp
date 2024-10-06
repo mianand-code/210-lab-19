@@ -2,7 +2,7 @@
 // Module 6, Lesson: Linked Lists, Assignment: Abstract & Automate
 // IDE used: Visual Studio Code for Mac
 
-// The program trusts that the user has the external input file is structured exactly the way I have created it
+// The program trusts that the user has the external input file structured exactly the way I have created it and that the file is not empty
 // Please open input file to see specific format to follow
 
 #include <cstdlib> // needed to generate random number
@@ -19,7 +19,7 @@ class Movie
 {
     // private member variables
     private:
-        struct ReviewNode // creation of a struct named "Review", for linked list development
+        struct ReviewNode // creation of a struct named "ReviewNode", for linked list development
         {
             double rating; // to store a movie rating
             string comment; // to store a movie review comment
@@ -80,6 +80,7 @@ class Movie
         // void print() function header
         // DESCRIPTION: this function will check if the linked list is empty or not. The contents of the linked list will be neatly outputted to the console
         // - if there are no contents, the user will be notified with a console message and the program will exit
+        // - if there are contents, the average movie rating will also be calculated and outputted
         // ARGUMENTS: no arguments/parameters
         // RETURNS: nothing, void function
         void print()
@@ -104,6 +105,21 @@ class Movie
 
                 current = current->next; // move to next node
             }
+
+            // calculate/output average review
+            double sum = 0.0; // to sum all ratings for a movie
+            double average = 0.0; // to hold calculated average rating for a movie
+            current = head; // set current back to head
+
+            // traverse the list again
+            while (current)
+            {
+                sum = sum + current->rating; // keep a running total of the ratings
+                current = current->next; // move to next node
+            }
+
+            average = sum / (reviewer - 1); // calculate average, dividing by (reviewer - 1) because the count started at 1 
+            cout << "Average rating: " << average << endl;
         }
 
         // creating third member method
@@ -118,7 +134,7 @@ class Movie
             while (current) // traverse the list, visit each node
             {
                 head = current->next; // head is set to next node
-                delete current; // delete node
+                delete current; // delete node at current
                 current = head; // current is set to head again
             }
 
@@ -144,9 +160,9 @@ int main()
     // the if condition checks if the input file opened correctly
     if (fin.good())
     {
-        while (getline(fin, singleInputFileLine)) // while loop used to read the movie title, which is the 1st line in the input file
+        while (getline(fin, singleInputFileLine)) // while loop used to read the movie title, which is the 1st line in the input file and the next line after a blank line is encountered
         {
-            Movie newNode(singleInputFileLine); // creation of a Movie object
+            Movie newNode(singleInputFileLine); // creation of a Movie object, partial constructor initializes title with singleInputFileLine
 
             while (getline(fin, singleInputFileLine)) // another while loop used to read the movie review comments
             {
@@ -156,12 +172,19 @@ int main()
                 }
 
                 // rating will be a double, within the range of 1.0 - 5.0
-                rating = (rand() % 41 + 10) / 10.0; // rand() % 41 = 0 - 40, + 10 = 10 - 50, / 10.0 = 1.0 - 5.0 
-                newNode.addNodeToHead(rating, singleInputFileLine); // calling the addNodeToHead public member function, setting the rating and review comment
+                // rand() % 41 = 0 - 40 
+                // + 10 = 10 - 50
+                // / 10.0 = 1.0 - 5.0 
+                rating = (rand() % 41 + 10) / 10.0;
+                newNode.addNodeToHead(rating, singleInputFileLine); // calling the addNodeToHead() public member function, setting the rating and review comments
             }
 
-            // using push_back to push data into the vector; the user can have as many movie records in the file as they would like
-            reviews.push_back(newNode);
+            // using insert() and begin()
+            // insert the current review before the review that is at the first element in the vector
+            // using this to ensure that the last review in the input file will output at the head (beginning)
+            // if I used push_back(), the purpose of addNodeToHead() would be defeated; reviews would output in exactly the same order as they are written in the input file
+            // the user can have as many movie records in the file as they would like
+            reviews.insert(reviews.begin(), newNode);
         }
 
         fin.close(); // Close the input file
@@ -176,17 +199,19 @@ int main()
 
     // output contents of the vector
     // using a C++ 11 range loop and "auto" keyword to output contents of the vector
+    // using auto& to access the original object and not a copy
     cout << "Outputting reviews for all movies..." << endl << endl;
-    for (auto movie : reviews)
+    for (auto& movie : reviews)
     {
         // printing contents by calling the print() public member function
         movie.print();
         cout << endl;
     }
 
-    // delete the linked list
+    // memory management (delete the linked list)
     // using a C++ 11 range loop and "auto" keyword to delete the linked list
-    for (auto movie : reviews)
+    // using auto& to access/modify the original object and not a copy. This is important when deleting the linked list, to ensure proper memory management
+    for (auto& movie : reviews)
     {
         // deleting linked list by calling the deleteList() public member function
         movie.deleteList();
